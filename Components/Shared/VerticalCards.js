@@ -31,7 +31,7 @@ export default VerticalCards
 
 const styles = StyleSheet.create({
     card: {
-        height: 80, // Meningkatkan tinggi kartu
+        height: 80,
         borderRadius: 6,
         elevation: 10,
         backgroundColor: '#fff',
@@ -48,24 +48,24 @@ const styles = StyleSheet.create({
     },
     cardText: {
         fontWeight: 'normal',
-        fontSize: 14, // Ukuran font bisa disesuaikan
-        color: '#333', // Tambahkan warna untuk kontras
-        flexWrap: 'wrap' // Memungkinkan teks membungkus jika terlalu panjang
+        fontSize: 14,
+        color: '#333',
+        flexWrap: 'wrap'
     },
     leftColumn: {
         flex: 3,
         marginHorizontal: 10,
-        justifyContent: 'center', // Menyelaraskan teks
+        justifyContent: 'center',
         alignItems: 'flex-start',
     },
     rightColumn: {
         flex: 1,
-        justifyContent: 'center', // Menyelaraskan gambar
+        justifyContent: 'center',
         alignItems: 'center',
     },
     image: {
         width: '90%',
         height: '80%',
-        resizeMode: 'contain', // Menjaga rasio aspek gambar
+        resizeMode: 'contain',
     }
 })
