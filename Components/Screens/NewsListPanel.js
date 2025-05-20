@@ -3,12 +3,15 @@ import React, { useEffect, useState } from 'react';
 import VerticalCards from '../Shared/VerticalCards';
 import axios from 'axios';
 
-const NewsListPanel = ({ SelectedCategory, navigation }) => {
+const NewsListPanel = ({ selectedCategory, navigation }) => {
     const FINANCEURL = 'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=243a17541b4547cca402082a2a8ac4c0';
-    const POLITICURL = 'https://newsapi.org/v2/top-headlines?country=us&category=politics&apiKey=243a17541b4547cca402082a2a8ac4c0'; // corrected
-    const SPORTURL = 'https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=243a17541b4547cca402082a2a8ac4c0'; // corrected
+    const POLITICURL = 'https://newsapi.org/v2/top-headlines?country=us&category=politics&apiKey=243a17541b4547cca402082a2a8ac4c0';
+    const SPORTURL = 'https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=243a17541b4547cca402082a2a8ac4c0';
+    const TECHURL = 'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=243a17541b4547cca402082a2a8ac4c0';
+    const ECONOMYURL = 'https://newsapi.org/v2/everything?domains=wsj.com&apiKey=243a17541b4547cca402082a2a8ac4c0';
 
-    const [SelectedNews, setSelectedNews] = useState([]); // State untuk berita yang terpilih
+    console.log(selectedCategory, "selected2")
+    const [SelectedNews, setSelectedNews] = useState([]);
 
     const fetchFinanceNews = async () => {
         try {
@@ -46,26 +49,53 @@ const NewsListPanel = ({ SelectedCategory, navigation }) => {
         }
     };
 
+    const fetchTechNews = async () => {
+        try {
+            const result = await axios.get(TECHURL);
+            console.log('Fetched Tech News:', result.data);
+            if (result.data && result.data.articles) {
+                setSelectedNews(result.data.articles);
+            }
+        } catch (error) {
+            console.error('Error fetching Tech news:', error);
+        }
+    };
+
+    const fetchEconomyNews = async () => {
+        try {
+            const result = await axios.get(ECONOMYURL);
+            console.log('Fetched Market News:', result.data);
+            if (result.data && result.data.articles) {
+                setSelectedNews(result.data.articles);
+            }
+        } catch (error) {
+            console.error('Error fetching Market news:', error);
+        }
+    };
+
     useEffect(() => {
-        console.log('SelectedCategory:', SelectedCategory); // Log untuk memeriksa kategori
-        if (SelectedCategory === 'Finance') {
+        console.log('SelectedCategory:', selectedCategory);
+        if (selectedCategory === 'Finance') {
+            console.log(selectedCategory, 'select category')
             fetchFinanceNews();
-        } else if (SelectedCategory === 'Politics') {
+        } else if (selectedCategory === 'Politics') {
             fetchPoliticNews();
-        } else if (SelectedCategory === 'Sports') {
+        } else if (selectedCategory === 'Sports') {
             fetchSportNews();
+        } else if (selectedCategory === 'Tech') {
+            fetchTechNews();
+        } else if (selectedCategory === 'Economy') {
+            fetchEconomyNews();  
         } else {
-            // Default to fetching finance news if category is not defined
             fetchFinanceNews();
         }
-    }, [SelectedCategory]);
+    }, [selectedCategory]);
 
     return (
         <View>
-            <Text>Hello NewsListPanel</Text>
             {SelectedNews.length > 0 ? (
                 SelectedNews.map(article => (
-                    <TouchableOpacity key={`${article.publishedAt}-${article.title || 'no-title'}`}>
+                    <TouchableOpacity onPress={() => navigation.navigate('news', article)} key={`${article.publishedAt}-${article.title || 'no-title'}`}>
                         <VerticalCards 
                             title={article.title || "No Title Available"} 
                             imageUrl={article.urlToImage} 

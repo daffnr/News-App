@@ -9,7 +9,7 @@ const HeadlinePanel = ({ navigation }) => {
 
     const fetchData = async () => {
         try {
-            const result = await axios.get('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=243a17541b4547cca402082a2a8ac4c0');
+            const result = await axios.get('https://newsapi.org/v2/everything?q=apple&from=2025-05-16&to=2025-05-16&sortBy=popularity&apiKey=243a17541b4547cca402082a2a8ac4c0');
             setHeadlineNews(result.data);
             console.log(result.data);
         } catch (error) {
@@ -23,11 +23,16 @@ const HeadlinePanel = ({ navigation }) => {
 
     return (
         <View>
-            <ScrollView horizontal>
+            <ScrollView showsHorizontalScrollIndicator={false} horizontal>
                 {HeadlineNews.articles ? (
                     HeadlineNews.articles.map(article => (
                         <View key={`${article.publishedAt}-${article.title || 'no-title'}`}>
-                            <TouchableOpacity onPress={() => {/* Handle navigation */}}>
+                            <TouchableOpacity onPress={() => navigation.navigate('news', {
+                                    title: article.title,
+                                    author: article.author,
+                                    urlToImage: article.urlToImage,
+                                    content: article.content
+                                })}>
                                 <Cards children={article.title || "No Title Available"} image={article.urlToImage} />
                             </TouchableOpacity>
                         </View>

@@ -2,27 +2,26 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
 
-const CategoryPanel = (props) => {
+const CategoryPanel = ({setSelectedCategory}) => {
+    // console.log(props, 'props category')
+
   return (
     <View style={styles.container}>
-      <ScrollView horizontal>
-        <TouchableOpacity style={styles.myButton} onPress={()=>props.setSelectedCategory("Finance")}>
-            <Text style={styles.buttonText}>Finance</Text>
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal>
+        <TouchableOpacity style={styles.myButton} onPress={()=>setSelectedCategory("Finance")}>
+            <Text style={styles.buttonText}>Business</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.myButton} onPress={()=>props.setSelectedCategory("Politics")}>
+        <TouchableOpacity style={styles.myButton} onPress={()=>setSelectedCategory("Politics")}>
             <Text style={styles.buttonText}>Politics</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.myButton} onPress={()=>props.setSelectedCategory("Sports")}>
+          <TouchableOpacity style={styles.myButton} onPress={()=>setSelectedCategory("Economy")}>
+            <Text style={styles.buttonText}>Economy</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.myButton} onPress={()=>setSelectedCategory("Tech")}>
+            <Text style={styles.buttonText}>Technology</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.myButton} onPress={()=>setSelectedCategory("Sports")}>
             <Text style={styles.buttonText}>Sports</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.myButton}>
-            <Text style={styles.buttonText}>Travles</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.myButton}>
-            <Text style={styles.buttonText}>Finance</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.myButton}>
-            <Text style={styles.buttonText}>Automotive</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -36,14 +35,14 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent:'center',
         alignItems:"center",
-        backgroundColor:'#fff',
+        // backgroundColor:'#fff',
         width:'100%'
     },
     myButton:{
         padding:15,
         borderRadius: 20,
         backgroundColor: 'red',
-        margin: 3
+        margin: 5
     },
     buttonText:{
         color:'white',

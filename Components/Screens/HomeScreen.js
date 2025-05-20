@@ -6,10 +6,9 @@ import CategoryScreen from './CategoryScreen'
 
 const HomeScreen = ({navigation}) => {
   return (
-    <GestureHandlerRootView>
-      <View style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={styles.container}>
         <ScrollView>
-          <Text>Headline ={'>'} swipe to see more</Text>
           <HeadlinePanel navigation ={navigation}/>
           <CategoryScreen navigation={navigation}/>
         </ScrollView>
@@ -20,4 +19,9 @@ const HomeScreen = ({navigation}) => {
 
 export default HomeScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+   container: {
+    flex: 1,
+    padding: 8,
+  },
+})

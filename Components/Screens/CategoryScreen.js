@@ -4,16 +4,12 @@ import CategoryPanel from './CategoryPanel';
 import NewsListPanel from './NewsListPanel';
 
 const CategoryScreen = ({ navigation }) => {
-  const [selectedCategory, setSelectedCategory] = useState("Finance");
-
-  useEffect(() => {
-    alert(selectedCategory)
-  }, [selectedCategory]);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   return (
     <View>
-      <CategoryPanel setSelectedCategory={setSelectedCategory} />
-      <NewsListPanel/> 
+      <CategoryPanel navigation={navigation} setSelectedCategory={setSelectedCategory} />
+      <NewsListPanel navigation={navigation} selectedCategory={selectedCategory}/> 
     </View>
   );
 };
