@@ -31,7 +31,7 @@ export default VerticalCards
 
 const styles = StyleSheet.create({
     card: {
-        height: 80, 
+        height: 80,
         borderRadius: 6,
         elevation: 10,
         backgroundColor: '#fff',
@@ -48,9 +48,9 @@ const styles = StyleSheet.create({
     },
     cardText: {
         fontWeight: 'normal',
-        fontSize: 14, 
-        color: '#333', 
-        flexWrap: 'wrap' 
+        fontSize: 14,
+        color: '#333',
+        flexWrap: 'wrap'
     },
     leftColumn: {
         flex: 3,
